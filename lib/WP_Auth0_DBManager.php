@@ -19,7 +19,11 @@ class WP_Auth0_DBManager
 			$current_ver = (int) get_site_option('auth0_db_version', 0);
 		}
 
-		if (empty($current_ver) || $current_ver === AUTH0_DB_VERSION) {
+		if ($current_ver === AUTH0_DB_VERSION) {
+			return;
+		}
+
+		if (empty($current_ver)) {
 			update_option('auth0_db_version', AUTH0_DB_VERSION);
 			return;
 		}
